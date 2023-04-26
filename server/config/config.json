@@ -1,0 +1,9 @@
+{
+    "development": {
+        "username": "root",
+        "password": "jack9812",
+        "database": "react_back",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
+      }
+}
