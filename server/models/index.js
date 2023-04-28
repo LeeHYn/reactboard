@@ -25,5 +25,5 @@ sequelize
   });
 
 db.users = require("./User.js")(sequelize, DataTypes);
-
+db.boards = require("./Board.js")(sequelize, DataTypes);
 module.exports = db;

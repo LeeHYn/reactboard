@@ -9,7 +9,9 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json())
 const router = require("./routers/UserRouter.js");
+const boardRouter = require("./routers/BoardRouter")
 app.use("/api", router);
+app.use("/api",boardRouter)
 
 
 app.listen(app.get("port"), () => {

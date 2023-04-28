@@ -1,7 +1,10 @@
 import React, { useState } from "react"
-import { useDispatch } from "react-redux";
+import {useDispatch} from "react-redux";
 import { loginUser } from "../../reducer/userSlice";
 import axios from "axios";
+import {Link, useHref} from "react-router-dom";
+
+
 
 
 function LoginComponent() {
@@ -10,8 +13,7 @@ function LoginComponent() {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
-    const LoginFunc = (e) => {
-        e.preventDefault();
+    const LoginFunc = () => {
         if (!id) {
             return alert("ID를 입력하세요.");
         }
@@ -19,13 +21,14 @@ function LoginComponent() {
             return alert("Password를 입력하세요.");
         }
         let body = {
-            id,
-            password
+            id:id,
+            password:password
         }
 
-        axios.post("http://localhost:8080/api/SignInUser", body)
+        console.log(body);
+
+        axios.post("http://localhost:8080/api/user/SignInUser", body)
             .then(res => {
-                console.log(res.data.code)
                 const code = res.data.code;
                 if (code === 401) {
                     alert("존재하지 않는 id혹은 비밀번호입니다.")
@@ -33,18 +36,16 @@ function LoginComponent() {
                     dispatch(loginUser(res.data));
                 }
             })
-        }
-
-
+    }
     return (
         <>
             <h1>LoginComponent</h1>
             <form
-                onSubmit={LoginFunc}
                 className="login-wrap"
             >
                 <input
                     type="text"
+                    id='id'
                     placeholder='아이디'
                     className='id'
                     onChange={e => setId(e.target.value)}
@@ -52,20 +53,26 @@ function LoginComponent() {
                 <br />
                 <input
                     type="password"
+                    id='password'
                     placeholder='비밀번호'
                     className='pw'
                     onChange={e => setPassword(e.target.value)}
                 />
                 <br />
                 <button
-                    type="submit"
+                    type="button"
                     className='btn'
+                    onClick={e => LoginFunc()}
                 >
                     로그인
                 </button>
             </form>
+            <Link to={"/SignUp"}>
+            <button>
+                회원가입
+            </button>
+            </Link>
         </>
     )
 }
-
 export default LoginComponent;
