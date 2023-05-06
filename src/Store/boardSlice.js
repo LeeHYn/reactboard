@@ -1,5 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {INTEGER} from "sequelize";
 
 export const boardSlice = createSlice({
     name: "board",
@@ -17,10 +16,11 @@ export const boardSlice = createSlice({
     },
     reducers: {
         getBoard: (state, action) => {
-            state.boardNum = (INTEGER)(action.payload.data.boardId);
+            state.boardNum =(action.payload.data.boardId).toInt();
             state.boardTitle = (String)(action.payload.data.boardTitle);
             state.boardTime = (String)(action.payload.data.createdAt);
             state.boardContext =(String)(action.payload.data.createdAt);
+            state.lastId = (action.payload.data.boardId)
             // state 변화를 알림
             return state;
         },

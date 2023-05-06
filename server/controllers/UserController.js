@@ -41,12 +41,17 @@ const oneUser = async (req, res ) => {
     let username = req.body.id;
     let password = req.body.password;
 
+    try {
         await User.findOne({where: {userId: username, password: password}}).then(result => {
-            res.status(200).json({code: 200, data: result.dataValues})
-            console.log(res.json({code: 200, data: result.dataValues}))
+            console.log(({code: 200, data: result.dataValues}))
+            return res.status(200).json({code: 200, data: result.dataValues})
         }).catch((err) => {
-            res.send({code: 401})
+          return res.send({code: 401})
         })
+    }catch (err){
+        throw err
+    }
+
 
 };
 //update

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import {useDispatch} from "react-redux";
-import { loginUser } from "../../reducer/userSlice";
+import { loginUser } from "../../Store/userSlice";
 import axios from "axios";
 import {Link, useHref} from "react-router-dom";
 
